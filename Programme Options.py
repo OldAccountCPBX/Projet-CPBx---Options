@@ -25,7 +25,6 @@ def valider():
 
 #ACTUALISATION CALL
 def ActualisationC(a,b,r,p,K,S0,N):
-    print("Actu :", N,S0)
     #Gestion Call0
     #Suppression des valeurs du Call0
     for w in frameCall0.winfo_children():
@@ -98,14 +97,12 @@ def ActualisationP(a,b,r,p,K,S0,N):
 
 def Suivant():
     global n
-    print("S0, N0,", S0.get(), N0.get())
     Ntest = N0.get()
     if n+1 > Ntest:
         showinfo("Temps dépasse", "Impossible, la date d'echeance vient d'etre depassee")
     else:
         n=n+1
         fluctu1()
-        print("S,N", S.get(), N.get())
         Sround.set(round(S.get(),4))
         S11.set(round(S.get()*(1+b.get()),4))
         S12.set(round(S.get()*(1+a.get()),4))
@@ -230,10 +227,8 @@ def put(a,b,r,K,N,n,S0):
 def ActualisationWalletC(a,b,r,K,N,n0,S0,p):
     global n
     if N == 0:
-        print("Ouais N=0, et n",n)
         phin = Phin.get()
         phi0 = Phi0.get()
-        print(S0)
         w = phi0 * (1 + r)**(n) + phin * S0
         ym = 20
         for i in range(0,3):
@@ -245,9 +240,6 @@ def ActualisationWalletC(a,b,r,K,N,n0,S0,p):
                 Label(frameWallet, text ="Valeur du portefeuille: ""{}""".format(round(w,4)), font=("Courier",13)).place(x = 10, y = ym)
             ym = ym + 30
     else:
-        print("N != 0 ", N,n)
-        print(S0)
-        print('----------------------')
         phin = (call(a,b,r,K,N-1,0,S0*(1+b)) - call(a,b,r,K,N-1,0,S0*(1+a)))/(S0*(b-a))
         Phin.set(phin)
         phi0 = (call(a,b,r,K,N-1,0,S0*(1+a))*(1+b) - call(a,b,r,K,N-1,0,S0*(1+b))*(1+a))/((b-a)*(1+r)**(n+1))
@@ -406,7 +398,7 @@ entree = Entry(frameVariables, textvariable=r, width=10).place(x = 245, y = 66)
 
 p = DoubleVar() 
 p.set(0.3)
-Label(frameVariables,text = "Probablilité de baisse :", font=("Courier",12)).place(x= 2, y=92)
+Label(frameVariables,text = "Probabilité de baisse :", font=("Courier",12)).place(x= 2, y=92)
 entree = Entry(frameVariables, textvariable=p, width=10).place(x = 245, y = 96)
 
 K = DoubleVar() 
